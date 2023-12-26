@@ -5,19 +5,20 @@
               <div class="card mb-3">
 
                 <div class="card-body">
-
+                    @include('layouts._message')
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Forgot Password</h5>
                     <p class="text-center small">Enter your Email to Reset Password</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form class="row g-3 needs-validation" method="post" action={{url('forgot_post')}} novalidate>
+                    {{csrf_field()}}
 
                     <div class="col-12">
                       <label for="email" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="email" name="email" class="form-control" id="email" required>
+                        <input type="email" name="email" class="form-control" id="email" required value="{{old('email')}}">
                         <div class="invalid-feedback">Please enter your username.</div>
                       </div>
                     </div>
