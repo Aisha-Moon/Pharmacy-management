@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ForgotPasswordMail;
-
-
+use App\Http\Requests;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -46,7 +46,30 @@ class AuthController extends Controller
             return redirect()->back()->with('error', 'Email Not Found');
         }
     }
+    public function getReset($token){
+        if(Auth::check()){
+            return redirect('admin/dashboard');
+        }
+        $user=User::where('remember_token','=',$token);
+        if($user->count()==0){
+            abort(403);
+        }
+        $user=$user->first();
+        $data['token']=$token;
+        return view('auth.reset',$data);
+    }
 
+    public function postReset($token, ResetPasswordRequest $request){
+        $user=User::where('remember_token','=',$token);
+        if($user->count()==0){
+            abort(403);
+        }
+        $user=$user->first();
+        $user->password=Hash::make($request->password);
+        $user->remember_token=Str::random(50);
+        $user->save();
+        return redirect('/')->with('success','Password Reset Successfully');
+    }
     public function logout(){
         Auth::logout();
         return redirect('/');

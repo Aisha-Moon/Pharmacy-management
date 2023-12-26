@@ -25,7 +25,7 @@
 
 
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Reset</button>
+                      <button class="btn btn-primary w-100" type="submit">Submit</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Login Here? <a href="{{ url('/') }}">Login</a></p>
