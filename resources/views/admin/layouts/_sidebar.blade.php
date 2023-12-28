@@ -14,6 +14,18 @@
           <span>Customer</span>
         </a>
       </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link @if(Request::segment(2)=='medicines') @else collapsed @endif" href="{{ url('admin/medicines') }}">
+          <i class="bi bi-shop"></i>
+          <span>Medicines</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link @if(Request::segment(2)=='medicines_stock') @else collapsed @endif" href="{{ url('admin/medicines_stock') }}">
+          <i class="bi bi-archive"></i>
+          <span>Medicines Stock</span>
+        </a>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
