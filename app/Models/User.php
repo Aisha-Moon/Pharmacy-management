@@ -42,4 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function getProfileImg(){
+        if (!empty($this->profile_img) && file_exists('profile/' . $this->profile_img)){
+            return url('profile/'.$this->profile_img);
+        }
+    }
 }

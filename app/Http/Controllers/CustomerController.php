@@ -8,11 +8,15 @@ use App\Models\Customer;
 class CustomerController extends Controller
 {
     public function customers(Request $request){
+        $data['header_title']='Customer List';
+
         $data['getRecord']=Customer::get();
         return view('admin.customers.list',$data);
     }
     public function add_customers(Request $request){
-        return view('admin.customers.add');
+        $data['header_title']='Add Customer';
+
+        return view('admin.customers.add',$data);
     }
     public function insert_add_customers(Request $request){
         $request->validate([
@@ -36,6 +40,8 @@ class CustomerController extends Controller
     }
     public function edit_customers($id){
         $data['getRecord']=Customer::find($id);
+        $data['header_title']='Edit Customer';
+
         return view('admin.customers.edit',$data);
     }
     public function update_customers(Request $request, $id)

@@ -9,10 +9,14 @@ class SupplierController extends Controller
 {
     public function index(Request $request){
         $data['getRecord']=Supplier::get();
+        $data['header_title']='Supplier List';
+
         return view('admin.suppliers.list',$data);
     }
     public function create(Request $request){
-        return view('admin.suppliers.add');
+        $data['header_title']='Add Supplier ';
+
+        return view('admin.suppliers.add',$data);
     }
     public function store(Request $request){
         $supplier = new Supplier();
@@ -26,6 +30,8 @@ class SupplierController extends Controller
     }
     public function edit($id){
         $data['getRecord']=Supplier::find($id);
+        $data['header_title']='Edit Supplier';
+
         return view('admin.suppliers.edit',$data);
     }
     public function update($id,Request $request){

@@ -10,10 +10,14 @@ class MedicineController extends Controller
 {
     public function medicines(Request $request){
         $data['getRecord']=Medicine::where('is_delete',0)->get();
+        $data['header_title']='Medicine List ';
+
         return view('admin.medicines.list',$data);
     }
     public function add_medicines(){
-        return view('admin.medicines.add');
+        $data['header_title']='Add Medicine';
+
+        return view('admin.medicines.add',$data);
     }
     public function insert_add_medicines(Request $request){
         $request->validate([
@@ -35,6 +39,8 @@ class MedicineController extends Controller
     }
     public function edit_medicines($id){
         $data['getRecord']=Medicine::find($id);
+        $data['header_title']='Edit Medicine';
+
         return view('admin.medicines.edit',$data);
     }
     public function update_medicines(Request $request, $id='')
@@ -71,10 +77,13 @@ class MedicineController extends Controller
     //medicine stocks starts here
     public function medicines_stock_list(){
         $data['getRecord']=MedicinesStock::get();
+        $data['header_title']='Medicine Stock List';
+
         return view('admin.medicines_stock.list',$data);
     }
     public function medicines_stock_add(){
         $data['getRecord']=Medicine::where('is_delete',0)->get();
+        $data['header_title']='Add Medicine Stock';
 
         return view('admin.medicines_stock.add',$data);
 
@@ -94,6 +103,7 @@ class MedicineController extends Controller
     public function medicines_stock_edit($id,Request $request){
         $data['oldRecord']=MedicinesStock::find($id);
         $data['getRecord']=Medicine::where('is_delete',0)->get();
+        $data['header_title']='Edit Medicine Stock';
 
         return view('admin.medicines_stock.edit',$data);
 

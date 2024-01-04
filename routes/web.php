@@ -8,6 +8,7 @@ use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\WebsiteLogoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,9 +71,17 @@ Route::group(['middleware'=>'admin'],function(){
         Route::get('', [PurchaseController::class, 'index']);
         Route::get('add', [PurchaseController::class, 'create']);
         Route::post('add', [PurchaseController::class, 'store']);
+        Route::get('edit/{id}', [PurchaseController::class, 'edit']);
+        Route::post('edit/{id}', [PurchaseController::class, 'update']);
+        Route::get('delete/{id}', [PurchaseController::class, 'delete']);
+
     });
-
-
+    //my account
+    Route::get('admin/my_account', [DashboardController::class, 'my_account']);
+    Route::post('admin/my_account', [DashboardController::class, 'my_account_update']);
+    //website logo
+    Route::get('admin/website_logo', [WebsiteLogoController::class, 'website_logo']);
+    Route::post('admin/website_logo_update', [WebsiteLogoController::class, 'website_logo_update']);
 
 
 });
